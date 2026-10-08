@@ -36,9 +36,9 @@ export default function CreatorConsole({onSelect, disabled}) {
   }}>
     <button ref={trigger} className="creator-trigger" aria-expanded={expanded}
       aria-controls="creator-panel" onClick={() => setExpanded(value => !value)}>
-      Пульт Творца <ChevronDown size={16}/>
+      Центр управления <ChevronDown size={16}/>
     </button>
-    {expanded && <nav id="creator-panel" className="creator-panel" aria-label="Пульт Творца">
+    {expanded && <nav id="creator-panel" className="creator-panel" aria-label="Центр управления">
       {items.map(([icon, title]) => <button key={title}
         className={`creator-item${title === 'Выйти' ? ' creator-exit' : ''}`}
         disabled={title === 'Выйти' && disabled}
