@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Sparkles, ArrowLeft, ArrowRight, Mail, Send, ShieldCheck, Sun} from 'lucide-react';
 import {supabase, authRedirect} from './auth';
+import {pendingReferral} from './referrals';
 
 export default function Auth({onDemo, onClose}) {
   const [email, setEmail] = useState('');
@@ -13,7 +14,8 @@ export default function Auth({onDemo, onClose}) {
     if (supabase) {
       setBusy(true);
       try {
-        const {error} = await supabase.auth.signInWithOtp({email, options:{emailRedirectTo:authRedirect()}});
+        const referrer = pendingReferral();
+        const {error} = await supabase.auth.signInWithOtp({email, options:{emailRedirectTo:authRedirect(), ...(referrer ? {data:{referrer_id:referrer}} : {})}});
         if (error) throw error;
       } catch {
         setNotice('Не удалось отправить ссылку. Попробуй позже или проверь адрес почты.');
