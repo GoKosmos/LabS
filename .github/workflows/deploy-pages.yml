@@ -23,7 +23,13 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - name: Build with Supabase Auth
+        run: npm run build
+        env:
+          # Public browser configuration, not administrative credentials.
+          VITE_SUPABASE_URL: https://ajmujnobyfrjretsiumd.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_3KyPUfNfZk5v07Tx0AUj1Q_SK3RAvGQ
+          VITE_AUTH_GOOGLE_ENABLED: 'false'
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
