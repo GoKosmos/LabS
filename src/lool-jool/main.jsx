@@ -1,19 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {createRoot} from 'react-dom/client';
-import {Heart, Sparkles, Hammer, ShieldCheck, Eye, Clock, Lock, MessageCircleHeart, ArrowRight, Lightbulb, Footprints, HandHeart, Palette} from 'lucide-react';
+import {Heart, Sparkles, Hammer, ShieldCheck, Eye, Clock, Lock, MessageCircleHeart, ArrowRight, Lightbulb, Footprints, HandHeart} from 'lucide-react';
 import {Sloth, Monkey} from './Characters.jsx';
 import TutorDemo from './TutorDemo.jsx';
 import './lool-jool.css';
-
-// Два варианта оформления для выбора: «Плюшевый» и «Игровой».
-// После выбора лишний вариант удаляем вместе с переключателем.
-const themes = [['plush', 'Плюшевый'], ['play', 'Игровой']];
-
-function initialTheme() {
-  const fromUrl = new URLSearchParams(location.search).get('theme');
-  if (themes.some(([id]) => id === fromUrl)) return fromUrl;
-  try {return localStorage.getItem('lj-theme') || 'plush';} catch {return 'plush';}
-}
 
 const whales = [
   {icon: Heart, title: 'Связь', text: 'Тёплая нить между ребёнком и родителем. Помощник не заменяет маму и папу — он помогает ребёнку делиться с ними своими открытиями.'},
@@ -36,12 +26,6 @@ const parents = [
 ];
 
 function App() {
-  const [theme, setTheme] = useState(initialTheme);
-  useEffect(() => {
-    document.documentElement.dataset.ljTheme = theme;
-    try {localStorage.setItem('lj-theme', theme);} catch {}
-  }, [theme]);
-
   return <div className="lj">
     <header className="lj-header">
       <a className="lj-logo" href="#top" aria-label="Lool & Jool — наверх"><span>Lool</span><i>&amp;</i><span>Jool</span></a>
@@ -146,11 +130,6 @@ function App() {
       <span>Lool & Jool — «Здесь рождается то, чего ещё не было»</span>
       <a href="../">Часть экосистемы Лаборатории Счастья</a>
     </footer>
-
-    <div className="theme-switch" role="radiogroup" aria-label="Вариант дизайна">
-      <Palette size={16}/><span>Вариант:</span>
-      {themes.map(([id, label]) => <button key={id} role="radio" aria-checked={theme === id} className={theme === id ? 'on' : ''} onClick={() => setTheme(id)}>{label}</button>)}
-    </div>
   </div>;
 }
 
