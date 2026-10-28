@@ -1,12 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Calculator, BookA, BookOpen, Leaf, RotateCcw, ClipboardList} from 'lucide-react';
-import {Sloth} from './Characters.jsx';
+import {Calculator, BookA, BookOpen, Leaf, RotateCcw, ClipboardList, Sparkles} from 'lucide-react';
+import {Sloth, Monkey} from './Characters.jsx';
 
 // Демо-сценарии репетитора: показывают педагогику из
 // docs/agents/lool-jool-repetitor-system-prompt.md — подводим к ответу, а не решаем.
+// Уроки ведут разные герои (как в Duolingo), Джул — главный наставник.
 // Настоящий ИИ пока не подключён.
 
 const math = {
+  teacher: 'Обезьянка',
   grade: '2 класс',
   task: 'У Маши было 7 яблок. Она дала 3 яблока брату. Потом мама дала ей ещё 5. Сколько яблок стало у Маши?',
   start: 'start',
@@ -31,6 +33,7 @@ const math = {
 };
 
 const russian = {
+  teacher: 'Ленивец',
   grade: '2 класс',
   task: 'Вставь пропущенную букву: в_да.',
   start: 'start',
@@ -96,12 +99,12 @@ export default function TutorDemo() {
     </div>
     <div className="tutor-window">
       <div className="tutor-head">
-        <div className="tutor-avatar"><Sloth title="Помощник"/></div>
-        <div><b>Твой помощник</b><span>{script ? script.grade + ' · ' + subject.title : subject.title}</span></div>
+        <div className={`tutor-avatar ${script ? '' : 'jool'}`}>{!script ? <Sparkles size={22}/> : script.teacher === 'Обезьянка' ? <Monkey/> : <Sloth/>}</div>
+        <div><b>{script ? script.teacher : 'Джул'}</b><span>{script ? script.grade + ' · ' + subject.title : subject.title}</span></div>
         {script && <button className="tutor-reset" onClick={() => reset()} aria-label="Начать заново"><RotateCcw size={17}/></button>}
       </div>
       <div className="tutor-log" ref={scroller} aria-live="polite">
-        {!script && <p className="tutor-soon">Этот предмет появится в следующих версиях. Попробуй математику или русский язык.</p>}
+        {!script && <p className="tutor-soon">Этот предмет скоро появится — я уже подбираю для него героя. А пока попробуй математику с Обезьянкой или русский язык с Ленивцем.</p>}
         {log.map((m, i) => m.who === 'task'
           ? <div key={i} className="task-card"><small>Задание</small>{m.text}</div>
           : <div key={i} className={`bubble ${m.who}`}>{m.text}</div>)}

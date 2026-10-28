@@ -1,6 +1,6 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-import {Heart, Sparkles, Hammer, ShieldCheck, Eye, Clock, Lock, MessageCircleHeart, ArrowRight, Lightbulb, Footprints, HandHeart} from 'lucide-react';
+import {Heart, Sparkles, Hammer, ShieldCheck, Eye, Clock, Lock, MessageCircleHeart, ArrowRight, Lightbulb, Footprints, HandHeart, Compass} from 'lucide-react';
 import {Sloth, Monkey} from './Characters.jsx';
 import TutorDemo from './TutorDemo.jsx';
 import './lool-jool.css';
@@ -55,7 +55,7 @@ function App() {
           <Sloth className="hero-sloth"/>
           <Monkey className="hero-monkey"/>
           <div className="speech s1">Сколько было сначала?</div>
-          <div className="speech s2">Я сам понял!</div>
+          <div className="speech s2">Получилось!</div>
         </div>
       </section>
 
@@ -65,6 +65,31 @@ function App() {
           <h2>Откуда имя</h2>
           <p><b>Jool</b> — это Юлия, основатель проекта: забота, структура и развитие. <b>Lool</b> — творческий импульс её сына Артёма, который в детстве слепил эти буквы из пластилина. Lool & Jool — это ребёнок и взрослый, которые учатся и растут вместе.</p>
         </div>
+      </section>
+
+      <section className="heroes">
+        <h2 className="section-title">Кто учит вместе с ребёнком</h2>
+        <div className="grid three">
+          <article className="card hero-card jool-card">
+            <div className="hero-pic jool-pic"><Compass size={64} strokeWidth={1.6}/></div>
+            <span className="role">Главный наставник</span>
+            <h3>Джул</h3>
+            <p>Взрослый друг и проводник. Встречает ребёнка, ведёт его по пути от темы к теме и помогает заметить, как много уже получилось.</p>
+          </article>
+          <article className="card hero-card">
+            <div className="hero-pic"><Monkey/></div>
+            <span className="role">Ведёт уроки</span>
+            <h3>Обезьянка</h3>
+            <p>Любопытная и весёлая. Превращает задачи в игру и всегда спрашивает: «А как у тебя это получилось?»</p>
+          </article>
+          <article className="card hero-card">
+            <div className="hero-pic"><Sloth/></div>
+            <span className="role">Ведёт уроки</span>
+            <h3>Ленивец</h3>
+            <p>Спокойный и терпеливый. Никуда не торопит: «Давай медленно, шаг за шагом — у нас всё получится».</p>
+          </article>
+        </div>
+        <p className="heroes-more">Скоро — новые герои для каждого предмета.</p>
       </section>
 
       <section className="whales">
